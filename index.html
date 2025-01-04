@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+  <style>
+    body{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: hsl(0, 0%, 95%);
+}
+#calculator{
+    font-family: Arial, sans-serif;
+    background-color: hsl(0, 0%, 15%);
+    border-radius: 10px;
+    max-width: 600px;
+    overflow: hidden;
+}
+#display{
+    width: 300px;
+    padding: 5px;
+    font-size: 5rem;
+    text-align: left;
+    border: none;
+    background-color: hsl(0, 0%, 20%);
+    color: white;
+}
+#keys{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+    padding: 5px;
+}
+button{
+    width: 70px;
+    height: 60px;
+    border-radius: 20px;
+    border: none;
+    background-color: hsl(0, 0%, 30%);
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:hover{
+     background-color: hsl(0, 0%, 40%);
+}
+button:active{
+    background-color: hsl(0, 0%, 50%);
+}
+.operator-btn{
+    background-color: hsl(35, 100%, 55%)
+}
+.operator-btn:hover{
+    background-color: hsl(60, 100%, 65%)
+}
+.operator-btn:active{
+    background-color: hsl(35, 100%, 75%)
+}
+
+  </style>
+</head>
+<body>
+  <div id="calculator">
+    <input type="text" id="display" readonly />
+    <br>
+    <button class="button" onclick="appendToDisplay('7')">7</button>
+    <button class="button" onclick="appendToDisplay('8')">8</button>
+    <button class="button" onclick="appendToDisplay('9')">9</button>
+    <button class="button" onclick="appendToDisplay('/')">/</button>
+    <br>
+    <button class="button" onclick="appendToDisplay('4')">4</button>
+    <button class="button" onclick="appendToDisplay('5')">5</button>
+    <button class="button" onclick="appendToDisplay('6')">6</button>
+    <button class="button" onclick="appendToDisplay('*')">*</button>
+    <br>
+    <button class="button" onclick="appendToDisplay('1')">1</button>
+    <button class="button" onclick="appendToDisplay('2')">2</button>
+    <button class="button" onclick="appendToDisplay('3')">3</button>
+    <button class="button" onclick="appendToDisplay('-')">-</button>
+    <br>
+    <button class="button" onclick="appendToDisplay('0')">0</button>
+    <button class="button" onclick="appendToDisplay('.')">.</button>
+    <button class="button" onclick="calculate()">=</button>
+    <button class="button" onclick="appendToDisplay('+')">+</button>
+    <br>
+    <button class="button" style="width: 90%;" onclick="clearDisplay()">Clear</button>
+  </div>
+
+  <script>
+    const display = document.getElementById("display");
+
+    function appendToDisplay(input) {
+      display.value += input;
+    }
+
+    function clearDisplay() {
+      display.value = "";
+    }
+
+    function calculate() {
+      try {
+        // Safely evaluate the mathematical expression
+        const result = Function('"use strict"; return (' + display.value + ')')();
+        display.value = result;
+      } catch (error) {
+        display.value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
